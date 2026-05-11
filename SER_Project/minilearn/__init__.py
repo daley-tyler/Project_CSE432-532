@@ -13,5 +13,6 @@ Usage:
 __version__ = "0.1.0"
 
 from .preprocessing import StandardScaler, train_test_split
+from .classifiers import LogisticRegression
 
-__all__ = ["StandardScaler", "train_test_split"]
+__all__ = ["StandardScaler", "train_test_split", "LogisticalRegression"]
