@@ -9,7 +9,7 @@ class StandardScaler:
         X = np.array(X, dtype=float)
         self.mean_ = np.mean(X, axis=0)
         self.std_ = np.std(X, axis=0)
-        self.std_[self.std == 0] = 1
+        self.std_[self.std_ == 0] = 1
         return self
     
     def transform(self, X):
