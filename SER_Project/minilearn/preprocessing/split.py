@@ -2,11 +2,11 @@ import numpy as np
 
 def train_test_split(X,y,test_size=.2,stratify=None):
     X = np.array(X)
-    y = np.arrau(y)
-    n_rows = len(x)
+    y = np.array(y)
+    n_rows = len(X)
 
     if stratify is None:
-        ind = np.arrange(n_rows)
+        ind = np.arange(n_rows)
         np.random.shuffle(ind)
         n_test = int(round(n_rows*test_size))
 
