@@ -32,10 +32,10 @@ def train_test_split(X,y,test_size=.2,stratify=None):
                 n_test = len(class_ind) -1
             
             test_list.extend(class_ind[:n_test])
-            test_list.extend(class_ind[n_test:])
+            train_list.extend(class_ind[n_test:])
 
-        train_ind = np.array(train_list)
-        test_ind = np.array(test_list)
+        train_ind = np.array(train_list, dtype=int)
+        test_ind = np.array(test_list, dtype=int)
         np.random.shuffle(train_ind)
         np.random.shuffle(test_ind)
 
