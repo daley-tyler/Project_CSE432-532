@@ -11,3 +11,34 @@ class LinearSVM:
         ones = np.ones((X.shape[0], 1))
         return np.column_stack((ones,X))
     
+    def fit(self, X, y):
+        X_bias = self.add_bias(X)
+        y = np.array(y)
+        self.class_ = np.unique(y)
+        self.w_ = np.zeros((len(self.class_), X_bias.shape[1]))
+
+        for i in range (len(self.class_)):
+            c = self.class_[i]
+            y_bin = np.where(y == c, 1, -1)
+            wz = np.zeros(X_bias.shape[1])
+
+            for j in range(self.n_iter):
+                for k in range(len(X_bias)):
+                    row = X_bias[k]
+                    t = y_bin[k]
+                    marg = t * np.dot(row,wz)
+                    #Regularize
+                    grad = wz.copy()
+                    #but don't touch the bias
+                    grad[0] = 0
+
+                    if marg <1:
+                        grad = grad - self.C_ * t * row
+                    
+                    #updated weights
+                    wz = wz - self.learning_rate * grad
+
+            self.w_[i] = wz
+
+
+
