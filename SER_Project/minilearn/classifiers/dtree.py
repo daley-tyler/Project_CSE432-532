@@ -92,6 +92,40 @@ class DecisionTreeClassifier:
         right_tree = self.build_tree(X[right],y[right], depth+1)
 
         return {"kind": "node", "feature": best_feat, "threshold": best_thresh, "left": left_tree, "right": right_tree}
+    
+    def fit(self, X, y):
+        X = np.array(X, dtype=float)
+        y = np.array(y)
+
+        self.class_ = np.unique(y)
+        self.tree_ = self.build_tree(X, y, 0)
+
+        return self
+    
+    def predict_one(self, row, node):
+        if node["kind"] == "leaf":
+            return node["class"]
+        feat = node["feature"]
+        thresh = node["threshold"]
+
+        if row[feat] <= thresh:
+            return self.predict_one(row, node["left"])
+        
+        return self.predict_one(row, node["right"])
+    
+    def predict(self,X):
+        X = np.array(X, dtype=float)
+        pred = []
+
+        for i in range(len(X)):
+            row = X[i]
+            pred.append(self.predict_one(row, self.tree_))
+
+        return np.array(pred)
+    
+    def score(self, X, y):
+        pred = self.predict(X)
+        return np.mean(pred == np.array(y))
         
 
 
