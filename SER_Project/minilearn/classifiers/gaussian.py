@@ -36,6 +36,18 @@ class GaussianNaiveBayes:
         log_feats = log_feats - ((row - mean) ** 2) / (2 * var)
         return log_prior + np.sum(log_feats)
 
-    def predict():
+    def predict(self, X):
+        X = np.array(X, dtype=float)
+        predicts = []
 
-    def score():
+        for r in X:
+            c_score = []
+            for c_idx in range(len(self.class_)):
+                c_score.append(self.log_prob(r, c_idx))
+            
+            top_idx = np.argmax(c_score)
+            predicts.append(self.class_[top_idx])
+
+    def score(self, X, y):
+        predicts = self.predict(X)
+        return np.mean(predicts == np.array(y))
