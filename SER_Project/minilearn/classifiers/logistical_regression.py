@@ -39,7 +39,15 @@ class LogisticRegression:
         return self
         
     def predict_prob(self, X):
-        X = np.array
+        X = np.array(X, dtype=float)
+        X_bias = self.add_intercept_col(X)
+        score = X_bias.dot(self.weight_.T)
+        prob = self.sigmoid(score)
+        row_sum = np.sum(prob, axis=1)
+        row_sum[row_sum==0] = 1
+
+        return prob / row_sum.reshape(-1,1)
+
     def predict():
         pass
     
