@@ -52,3 +52,13 @@ class KMeans:
             self.inertia_ = self.inertia_ + np.sum((X[i] - center)**2)
 
         return self
+    
+    def predict(self,X):
+        X = np.array(X, dtype=float)
+        dists = self.distances(X)
+        return np.argmin(dists, axis=1)
+    
+    def predict_fit(self,X):
+        self.fit(X)
+
+        return self.labels_
