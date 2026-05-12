@@ -47,6 +47,8 @@ class GaussianNaiveBayes:
             
             top_idx = np.argmax(c_score)
             predicts.append(self.class_[top_idx])
+                            
+        return np.array(predicts)
 
     def score(self, X, y):
         predicts = self.predict(X)

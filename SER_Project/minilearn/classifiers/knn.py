@@ -8,7 +8,7 @@ class KNNClassifier:
 
     def fit(self, X, y):
         self.X_train_ = np.array(X, dtype=float)
-        self.y_train_ = np.array(y)
+        self.Y_train_ = np.array(y)
         return self
     
     def predict_r(self, row):

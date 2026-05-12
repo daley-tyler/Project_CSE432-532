@@ -14,5 +14,8 @@ __version__ = "0.1.0"
 
 from .preprocessing import StandardScaler, train_test_split
 from .classifiers import LogisticRegression
+from .classifiers import GaussianNaiveBayes
+from .classifiers import KNNClassifier, KNN
 
-__all__ = ["StandardScaler", "train_test_split", "LogisticalRegression"]
+
+__all__ = ["StandardScaler", "train_test_split", "LogisticRegression", "GaussianNaiveBayes", "KNNClassifier", "KNN"]
