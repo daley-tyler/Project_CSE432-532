@@ -24,7 +24,7 @@ def train_test_split(X,y,test_size=.2,stratify=None):
         for class_lab in np.unique(stratify):
             class_ind = np.where(stratify == class_lab)[0]
             np.random.shuffle(class_ind)
-            n_test = int(round(len(class_ind)))
+            n_test = int(round(len(class_ind) * test_size))
 
             if n_test < 1 and len(class_ind) > 1:
                 n_test=1
