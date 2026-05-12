@@ -21,7 +21,7 @@ class PCA:
         eig_val, eig_vec = np.linalg.eigh(covar)
 
         #Sort but from large to small
-        idx = np.argsort()[::-1]
+        idx = np.argsort(eig_val)[::-1]
 
         eig_val = eig_val[idx]
         eig_vec = eig_vec[:,idx]
@@ -33,4 +33,15 @@ class PCA:
         self.explained_variance_r_ = self.explained_variance_ / total_var
 
         return self
+    
+    def transform(self, X):
+        X = np.array(X, dtype=float)
+
+        X_center = X - self.mean_
+
+        return X_center.dot(self.components_.T)
+    
+    def fit_transform(self, X):
+        self.fit(X)
+        return self.transform(X)
 
