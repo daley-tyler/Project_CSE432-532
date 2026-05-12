@@ -43,7 +43,7 @@ def avg_score(scores, supports, avg):
         if total == 0:
             return 0
         
-        return np.sum(scores+supports) / total
+        return np.sum(scores*supports) / total
     
     return scores
 
@@ -66,5 +66,58 @@ def precision_score(y_t, y_p, avg="macro", labels=None):
             precis = tposi / (tposi+fposi)
         
         scores.append(precis)
+        supports.append(support)
+    return avg_score(scores, supports, avg)
+
+def recall_score(y_t, y_p, avg="macro", labels=None):
+    labels = class_labels(y_t, y_p, labels)
+    cmatrix = confusion_matrix(y_t, y_p, labels=labels)
+
+    scores = []
+    supports = []
+
+    for i in range(len(labels)):
+        tposi = cmatrix[i,i]
+        fneg = np.sum(cmatrix[i,:]) - tposi
+        support = np.sum(cmatrix[i,:])
+
+        if tposi + fneg == 0:
+            re = 0
+        else:
+            re = tposi / (tposi+fneg)
+        scores.append(re)
+        supports.append(support)
+
+    return avg_score(scores, supports, avg)
+
+def f1_score(y_t, y_p, avg="macro", labels=None):
+    labels = class_labels(y_t, y_p, labels)
+    cmatrix = confusion_matrix(y_t, y_p, labels=labels)
+
+    scores = []
+    supports = []
+
+    for i in range(len(labels)):
+        tposi = cmatrix[i,i]
+        fposi = np.sum(cmatrix[:,i]) - tposi
+        fneg = np.sum(cmatrix[i,:]) - tposi
+        support = np.sum(cmatrix[i,:])
+
+        if tposi + fposi == 0:
+            precis = 0
+        else:
+            precis = tposi / (tposi+fposi)
+        
+        if tposi + fneg ==0:
+            re = 0
+        else:
+            re = tposi / (tposi+fneg)
+        
+        if precis + re == 0:
+            f1 = 0
+        else:
+            f1 = 2*precis*re/(precis+re)
+
+        scores.append(f1)
         supports.append(support)
     return avg_score(scores, supports, avg)
