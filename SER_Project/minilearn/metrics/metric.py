@@ -30,9 +30,41 @@ def confusion_matrix(y_t, y_p, labels=None):
 
     return ematrix
 
-def precision_score
+def avg_score(scores, supports, avg):
+    scores = np.array(scores)
+    supports = np.array(supports)
 
-def recall
+    if avg == "macro":
+        return np.mean(scores)
+    
+    if avg == "weighted":
+        total = np.sum(supports)
 
-def F1_score
+        if total == 0:
+            return 0
+        
+        return np.sum(scores+supports) / total
+    
+    return scores
 
+def precision_score(y_t, y_p, avg="macro", labels=None):
+    labels = class_labels(y_t, y_p, labels)
+    cmatrix = confusion_matrix(y_t, y_p, labels=labels)
+
+    scores=[]
+    supports=[]
+
+    for i in range(len(labels)):
+        tposi = cmatrix[i,i]
+        fposi = np.sum(cmatrix[:,i]) - tposi
+
+        support = np.sum(cmatrix[i, :])
+
+        if tposi + fposi == 0:
+            precis = 0
+        else:
+            precis = tposi / (tposi+fposi)
+        
+        scores.append(precis)
+        supports.append(support)
+    return avg_score(scores, supports, avg)
