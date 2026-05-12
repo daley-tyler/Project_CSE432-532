@@ -73,6 +73,26 @@ class DecisionTreeClassifier:
         return best_feat, best_thresh
     
     def build_tree(self,X,y,depth):
-        if len(np.unique(y)) == 1
+        if len(np.unique(y)) == 1:
+            return {"kind": "leaf", "class": y[0]}
+        if depth >= self.max_depth:
+            return {"kind": "leaf", "class": self.m_class(y)}
+
+        if len(y) < self.min_samples_split:
+            return {"kind": "leaf", "class": self.m_class(y)}
+
+        best_feat, best_thresh = self.best_split(X, y)
+
+        if best_feat is None:
+            return {"kind": "leaf", "class": self.m_class(y)}
+        
+        left = X[:, best_feat] <= best_thresh
+        right = X[:, best_feat] > best_thresh
+        left_tree = self.build_tree(X[left], y[left], depth+1)
+        right_tree = self.build_tree(X[right],y[right], depth+1)
+
+        return {"kind": "node", "feature": best_feat, "threshold": best_thresh, "left": left_tree, "right": right_tree}
+        
+
 
             
