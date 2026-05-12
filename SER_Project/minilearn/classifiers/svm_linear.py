@@ -39,6 +39,16 @@ class LinearSVM:
                     wz = wz - self.learning_rate * grad
 
             self.w_[i] = wz
-
-
-
+    
+    def d_function(self, X):
+        X_bias = self.add_bias(X)
+        return X_bias.dot(self.w_.T)
+    
+    def predict(self, X):
+        scores = self.d_function(X)
+        highs_idx = np.argmax(scores, axis=1)
+        return self.class_[highs_idx]
+    
+    def score(self, X, y):
+        pred = self.predict(X)
+        return np.mean(pred == np.array(y))
