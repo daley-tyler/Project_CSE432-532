@@ -18,5 +18,9 @@ from .classifiers import GaussianNaiveBayes
 from .classifiers import KNNClassifier, KNN
 from .metrics import accuracy_score, confusion_matrix, precision_score, recall_score, f1_score
 from .classifiers import LinearSVM
+from .model import k_fold_split
+from .model import KMeans
+from .model import PCA
+from .model import ANNClassifier
 
-__all__ = ["StandardScaler", "train_test_split", "LogisticRegression", "GaussianNaiveBayes", "KNNClassifier", "KNN", "accuracy_score", "LinearSVM", confusion_matrix, precision_score, recall_score, f1_score]
+__all__ = ["StandardScaler", "train_test_split", "LogisticRegression", "GaussianNaiveBayes", "KNNClassifier", "KNN", "accuracy_score", "LinearSVM", "confusion_matrix", "precision_score", "recall_score", "f1_score", "k_fold_split", "KMeans", "PCA", "ANNClassifier"]
