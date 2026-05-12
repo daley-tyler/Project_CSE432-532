@@ -48,8 +48,11 @@ class LogisticRegression:
 
         return prob / row_sum.reshape(-1,1)
 
-    def predict():
-        pass
+    def predict(self, X):
+        prob = self.predict_prob(X)
+        c_ind = np.argmax(prob, axis=1)
+        return self.class_[c_ind]
     
-    def score():
-        pass
+    def score(self, X, y):
+        pred = self.predict(X)
+        return np.mean(pred == np.array(y))
