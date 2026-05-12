@@ -27,7 +27,14 @@ class GaussianNaiveBayes:
 
         return self
 
-    def log_prob():
+    def log_prob(self, row, c_idx):
+        mean = self.means_[c_idx]
+        var = self.vars_[c_idx]
+        prior = self.prior_[c_idx]
+        log_prior = np.log(prior)
+        log_feats = -.5 * np.log(2 * np.pi * var)
+        log_feats = log_feats - ((row - mean) ** 2) / (2 * var)
+        return log_prior + np.sum(log_feats)
 
     def predict():
 
