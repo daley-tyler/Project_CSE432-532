@@ -9,3 +9,19 @@ class DecisionTreeClassifier:
         self.class_ = None
 
     def gini(self, y):
+        y = np.array(y)
+
+        g = 1
+
+        for c in np.unique(y):
+            p = np.mean(y==c)
+            g = g-p ** 2
+        
+        return g
+    
+    def m_class(self,y):
+        labels, counts = np.unique(y, return_counts=True)
+        b_idx = np.argmax(counts)
+        return labels[b_idx]
+    
+    
