@@ -16,6 +16,6 @@ from .preprocessing import StandardScaler, train_test_split
 from .classifiers import LogisticRegression
 from .classifiers import GaussianNaiveBayes
 from .classifiers import KNNClassifier, KNN
+from .metrics import accuracy_score
 
-
-__all__ = ["StandardScaler", "train_test_split", "LogisticRegression", "GaussianNaiveBayes", "KNNClassifier", "KNN"]
+__all__ = ["StandardScaler", "train_test_split", "LogisticRegression", "GaussianNaiveBayes", "KNNClassifier", "KNN", "accuracy_score"]
