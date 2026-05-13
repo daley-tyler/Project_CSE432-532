@@ -18,7 +18,7 @@ def k_fold_split(y, n_splits=5, shuffle=True):
             folds[f_num].append(c_idx[i])
 
     splits = []
-    row_idx = np.arrange(len(y))
+    row_idx = np.arange(len(y))
 
     for j in range(n_splits):
         valid_idx = np.array(folds[j], dtype=int)
