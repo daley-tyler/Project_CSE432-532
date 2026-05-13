@@ -70,3 +70,21 @@ class ANNClassifier:
             self.b1_ = self.b1_ - self.learning_rate * db1
 
         return self
+    
+    def predict_proba(self, X):
+        X = np.array(X, dtype=float)
+        z1 = X.dot(self.W1_) + self.b1_
+        a1 = self.relu(z1)
+        z2 = a1.dot(self.W2_) + self.b2_
+        return self.softmax(z2)
+
+    def predict(self, X):
+        probs = self.predict_proba(X)
+        pred_idx = np.argmax(probs, axis=1)
+        return self.classes_[pred_idx]
+
+    def score(self, X, y):
+        pred = self.predict(X)
+        return np.mean(pred == np.array(y))
+    
+    
