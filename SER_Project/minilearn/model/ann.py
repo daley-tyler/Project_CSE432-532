@@ -13,3 +13,14 @@ class ANNClassifier:
         self.W2_ = None
         self.b2_ = None
         self.loss_ = []
+
+    def relu(self, z):
+        return np.maximum(0,z)
+    
+    def relu_grad(self,z):
+        return (z>0).astype(float)
+    
+    def softmax(self,z):
+        z = z - np.max(z, axis=1, keepdims=True)
+        e = np.exp(z)
+        return e / np.sum(e, axis=1, keepdims=True)
