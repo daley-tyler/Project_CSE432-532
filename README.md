@@ -1,3 +1,13 @@
+# Historical speech emotion recognition coursework
+
+This is my original coursework fork of [sahamis/Project_CSE432-532](https://github.com/sahamis/Project_CSE432-532). I keep it to preserve the academic history and instructor attribution.
+
+The maintained portfolio version is [Speech Emotion Recognition with MiniLearn](https://github.com/daley-tyler/speech-emotion-recognition). It includes corrected numerical behavior, regression tests and actor-grouped evaluation. For setup and current results, start there. This historical fork has not received those fixes.
+
+The instructor-provided assignment follows unchanged.
+
+---
+
 # CSE 432/532 — Machine Learning Semester Project
 
 ## Speech Emotion Recognition (SER) Using the RAVDESS Dataset
